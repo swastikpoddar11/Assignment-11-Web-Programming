@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Authentication | Secure Login Portal</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <div class="auth-container">
+    <div class="auth-card">
+      <div class="card-header">
+        <div class="app-badge">🔒 Enterprise Auth v2.0</div>
+        <h1>Account Sign In</h1>
+        <p>Authenticate with your registered system credentials</p>
+      </div>
+
+      <!-- Server-rendered feedback alerts -->
+      {{ERROR_MESSAGE}}
+      {{SUCCESS_MESSAGE}}
+
+      <form id="loginForm" action="/login" method="POST" autocomplete="off">
+        <div class="form-group">
+          <label for="username">Username / Login ID</label>
+          <div class="input-wrapper">
+            <span class="input-icon">👤</span>
+            <input 
+              type="text" 
+              id="username" 
+              name="username" 
+              class="form-control" 
+              placeholder="e.g. swastik_admin" 
+              value="{{USERNAME}}" 
+              required 
+              autofocus
+            >
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <label for="password" style="margin-bottom: 0;">Password</label>
+            <button type="button" id="togglePasswordBtn" style="background:none; border:none; color: #818cf8; font-size: 0.8rem; cursor: pointer;">
+              Show
+            </button>
+          </div>
+          <div class="input-wrapper">
+            <span class="input-icon">🔑</span>
+            <input 
+              type="password" 
+              id="password" 
+              name="password" 
+              class="form-control" 
+              placeholder="Enter your password" 
+              required
+            >
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary" id="submitBtn">
+          Validate & Sign In →
+        </button>
+      </form>
+
+      <!-- Testing Helper Pills -->
+      <div class="test-credentials">
+        <h4>⚡ Quick-Fill Test Accounts (Database Seeded)</h4>
+        <div class="credential-chips">
+          <div class="chip" onclick="fillCredentials('swastik_admin', 'Password@123')">
+            <span class="chip-user">👑 swastik_admin (Admin)</span>
+            <span class="chip-pass">Password@123</span>
+          </div>
+          <div class="chip" onclick="fillCredentials('john_doe', 'SecurePass#2026')">
+            <span class="chip-user">💻 john_doe (Engineer)</span>
+            <span class="chip-pass">SecurePass#2026</span>
+          </div>
+          <div class="chip" onclick="fillCredentials('invalid_user', 'WrongPassword123')" style="border-color: rgba(239, 68, 68, 0.4);">
+            <span class="chip-user" style="color: #fca5a5;">❌ Test Failure Case</span>
+            <span class="chip-pass">WrongPassword123</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-footer">
+        Don't have an account in the database? <a href="/register">Register new user</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/main.js"></script>
+</body>
+</html>
